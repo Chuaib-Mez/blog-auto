@@ -30,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #111; /* Fond général sombre */
+    background-color: #111;
     }
     .content {
     display: flex;
@@ -43,7 +43,7 @@
     color : white;
     }
     a {
-    color: #0077cc; /* Couleur du lien d'inscription */
+    color: #0077cc;
     text-decoration: none;}
 
     .login-card {
