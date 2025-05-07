@@ -1,47 +1,44 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
-</template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    <HeaderMenu @changePage="changePage" />
+    <router-view/>
+  </template>
+  
+  <script setup>
+  import { ref, shallowRef } from 'vue'
+  
+  // Importation du menu
+  import HeaderMenu from './components/HeaderMenu.vue'
+  
+  // Importation des pages
+  import Home from './pages/Home.vue'
+  import AddArticle from './pages/AddArticle.vue'
+  import EditArticle from './pages/EditArticle.vue'
+  import Login from './pages/Login.vue'
+  import Register from './pages/Register.vue'
+  
+  // Objet contenant toutes les pages accessibles
+  const pages = {
+    Home,
+    AddArticle,
+    EditArticle,
+    Login,
+    Register,
+    Discovery: Home,       // Tu peux changer par une vraie page plus tard
+    Profil: Login,         // Exemple temporaire
+    Parameters: Register   // Exemple temporaire
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
+  
+  // Page actuellement affichée
+  const currentPage = shallowRef(Home)
+  
+  // Fonction déclenchée par le menu
+  function changePage(pageName) {
+    currentPage.value = pages[pageName]
   }
+  </script>
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+body {
+  margin: 0;
 }
 </style>
