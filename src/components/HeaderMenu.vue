@@ -6,8 +6,8 @@
         <h1>AutoG</h1>
         <nav>
           <router-link to="/" class="nav-item">Accueil</router-link>
-          <router-link to="/discovery" class="nav-item">À Découvrir</router-link>
-          <router-link to="/profil" class="nav-item">Profil</router-link>
+          <router-link to="/add " class="nav-item">À Découvrir</router-link>
+          <router-link to="/Login" class="nav-item">Profil</router-link>
           <router-link to="/parameters" class="nav-item">Paramètres</router-link>
           <button class="logout" @click="logout">Déconnexion</button>
         </nav>
