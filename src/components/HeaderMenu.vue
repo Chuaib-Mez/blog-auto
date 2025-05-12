@@ -1,11 +1,13 @@
 <template>
+  <!-- Tiroir avec transition -->
   <Transition name="drawer">
     <aside v-if="isOpen" class="drawer">
       <div class="menu-content">
         <h1>AutoG</h1>
         <nav>
           <router-link to="/" class="nav-item">Accueil</router-link>
-          <router-link to="/Login" class="nav-item">Profil</router-link>
+          <router-link to="/discovery" class="nav-item">À Découvrir</router-link>
+          <router-link to="/profil" class="nav-item">Profil</router-link>
           <router-link to="/parameters" class="nav-item">Paramètres</router-link>
           <button class="logout" @click="logout">Déconnexion</button>
         </nav>
@@ -13,7 +15,12 @@
     </aside>
   </Transition>
 
-  <div class="drawer-handle" :class="{ moved: isOpen }" @click="toggleMenu">|||</div>
+  <!-- Poignée extérieure synchronisée -->
+  <div
+    class="drawer-handle"
+    :class="{ moved: isOpen }"
+    @click="toggleMenu"
+  >|||</div>
 </template>
 
 <script setup>
@@ -30,6 +37,7 @@ function logout() {
 </script>
 
 <style scoped>
+/* Tiroir latéral */
 .drawer {
   position: fixed;
   top: 0;
@@ -43,6 +51,7 @@ function logout() {
   overflow: hidden;
 }
 
+/* Contenu du tiroir */
 .menu-content {
   display: flex;
   flex-direction: column;
@@ -56,6 +65,7 @@ h1 {
   margin: 0;
 }
 
+/* Menu de navigation */
 nav {
   display: flex;
   flex-direction: column;
@@ -63,7 +73,6 @@ nav {
   gap: 0.5rem;
 }
 
-/* Liens du menu */
 .nav-item {
   display: block;
   width: 100%;
@@ -72,6 +81,7 @@ nav {
   text-decoration: none;
   color: white;
   transition: background-color 0.2s;
+  padding: 30px 0 30px 0;
 }
 .nav-item:hover {
   background-color: #444;
@@ -84,17 +94,18 @@ nav {
   text-align: center;
   padding: 0.75rem 0;
   cursor: pointer;
+  padding: 30px 0 30px 0;
 }
 .logout:hover {
   background-color: #444;
 }
 
-/* Poignée */
+/* Poignée extérieure */
 .drawer-handle {
   position: fixed;
   top: 50%;
   left: 0;
-  transform: translateY(-50%);
+  transform: translateX(0) translateY(-50%);
   width: 15px;
   height: 60px;
   background-color: #444;
@@ -106,14 +117,15 @@ nav {
   color: white;
   font-size: 1.2rem;
   user-select: none;
-  transition: left 0.3s ease;
+  transition: transform 0.6s ease;
   z-index: 200;
 }
+
 .drawer-handle.moved {
-  left: min(25vw, 300px);
+  transform: translateX(min(25vw, 300px)) translateY(-50%);
 }
 
-/* Animation de transition */
+/* Animation Vue pour l'entrée/sortie du tiroir */
 .drawer-enter-from,
 .drawer-leave-to {
   transform: translateX(-100%);
